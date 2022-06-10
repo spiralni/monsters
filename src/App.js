@@ -1,7 +1,64 @@
 import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
 
-function App() {
+const ApiUrl = 'https://jsonplaceholder.typicode.com/users'
+
+class App extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      searchFilter: '',
+      monsters: []
+    }
+  }
+
+  componentDidMount() {
+    fetch(ApiUrl)
+    .then(response => response.json())
+    .then(monsters => {
+      const list = monsters.map(monster => ({ id: monster.id, name: monster.name }))
+
+      this.setState({
+        ...this.state,
+        monsters: list
+      })
+    })
+  }
+
+  setFilter = (searchString) => {
+    this.setState({
+      ...this.state,
+      searchFilter: searchString,
+    })    
+  }
+
+  render() {
+    const filteredMonsters = this.state
+      .monsters
+      .filter(monster => monster.name.toLowerCase().includes(this.state.searchFilter.toLowerCase()))
+
+    return (
+      <div className="App">
+        <input 
+          type="search"
+          placeholder="search monsters"
+          class="search-box"
+          onChange={e => this.setFilter(e.target.value)}
+        ></input>
+        {
+          filteredMonsters.map(m => <div key={m.id}>
+            <h1>{m.name}</h1>
+          </div>)
+        }
+      </div>
+    );
+  }
+}
+
+function AppFunc() {
   return (
     <div className="App">
       <header className="App-header">
