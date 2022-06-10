@@ -4,11 +4,11 @@ class CardList extends Component {
     
     render() {
         const { monsters } = this.props
-        
+
         return (
             <div>
                 {
-                    monsters.map(m => <h1>{m.name}</h1>)
+                    monsters.map(m => <div key={m.id}><h1>{m.name}</h1></div>)
                 }
             </div>
         )

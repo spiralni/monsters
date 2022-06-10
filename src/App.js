@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
 
 const ApiUrl = 'https://jsonplaceholder.typicode.com/users'
 
@@ -43,12 +44,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input 
-          type="search"
-          placeholder="search monsters"
-          className="search-box"
-          onChange={e => this.setFilter(e.target.value)}
-        ></input>
+        <SearchBox placeholder="search" className="search-box" onSearchChange={this.setFilter}></SearchBox>
         <CardList monsters={filteredMonsters}></CardList>
       </div>
     );
