@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
+import CardList from './components/card-list/card-list.component';
 
 const ApiUrl = 'https://jsonplaceholder.typicode.com/users'
 
@@ -45,14 +46,10 @@ class App extends Component {
         <input 
           type="search"
           placeholder="search monsters"
-          class="search-box"
+          className="search-box"
           onChange={e => this.setFilter(e.target.value)}
         ></input>
-        {
-          filteredMonsters.map(m => <div key={m.id}>
-            <h1>{m.name}</h1>
-          </div>)
-        }
+        <CardList monsters={filteredMonsters}></CardList>
       </div>
     );
   }
