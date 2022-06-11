@@ -21,7 +21,7 @@ class App extends Component {
     fetch(ApiUrl)
     .then(response => response.json())
     .then(monsters => {
-      const list = monsters.map(monster => ({ id: monster.id, name: monster.name }))
+      const list = monsters.map(monster => ({ id: monster.id, name: monster.name, email: monster.email }))
 
       this.setState({
         ...this.state,
@@ -44,7 +44,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <SearchBox placeholder="search" className="search-box" onSearchChange={this.setFilter}></SearchBox>
+        <h1 className="app-title">Robo Monsters</h1>
+        <SearchBox placeholder="search" className="search-box-monsters" onSearchChange={this.setFilter}></SearchBox>
         <CardList monsters={filteredMonsters}></CardList>
       </div>
     );
